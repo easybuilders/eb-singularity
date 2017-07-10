@@ -43,3 +43,10 @@ $ singularity shell ack-2.14.img
 
 > ack --bar
 ```
+
+## To Do:
+- Right now the `build.def` file downloads a starter container from Docker Hub and uses that to finish the installation.  We may want the `build.def` to be self-contained so that it installs EasyBuild and Lmod itself.  We may also want to start from a few different containers that already have compiler toolchains installed in them so that we don't have to begin all of our containers by compiling `gcc`.
+- The way this sources the environment for Lmod is broken and needs to be fixed.
+- The container should be stripped of all non-essential programs (including EasyBuild and Lmod) when it is finished installing the target application.  This will shrink the size so that we can copy the container contents to another slimmer container.  
+- At the conclusion of the build, we should load the target app with Lmod using the `module` command and then take a snapshot of the environment.  Then the environment should be written out to the `/.singularity.d/env` directory so that we can remove Lmod and still access our app. 
+- Right now the build is happening within the container.  But this is wrong.  Ideally, I think we want it in `/scratch` since `/tmp` can be small and may bottom out if we are building big things with tons of source code and object files (like `gcc`).  
