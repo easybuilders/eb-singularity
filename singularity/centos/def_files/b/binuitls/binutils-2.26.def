@@ -31,7 +31,7 @@ Include: yum
                 # install csh/tcsh shell
                 yum install tcsh -y
  
-                # epel.repo needed for Lmod and python2-pip
+                # epel.repo needed for Lmod and python-pip
                 yum install -y epel-release
                 yum install -y Lmod
 
@@ -45,16 +45,15 @@ Include: yum
 
 		
                 useradd easybuild
-		# run all commands as singularity user
- 	        # runuser singularity -c "export EASYBUILD_ROBOT_PATHS=/usr/easybuild/easyconfigs/; eb --show-full-config; eb binutils-2.26.eb --robot "
+		# run all commands as easybuild user
  	        runuser easybuild -l -c "eb binutils-2.26.eb --robot --prefix=/scratch --installpath=/app"
  
 %runscript
                 eval "$@"
 
 %environment
-    source /etc/bashrc 
-    SOFTWARE_NAME=binutil
+    source /etc/profile
+    SOFTWARE_NAME=binutils
     SOFTWARE_VERSION=2.26
     module use /app/modules/all
     module load ${SOFTWARE_NAME}/${SOFTWARE_VERSION}
