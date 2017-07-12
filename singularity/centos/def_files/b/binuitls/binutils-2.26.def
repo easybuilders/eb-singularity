@@ -13,8 +13,6 @@ Include: yum
 
 
 %post
-		export SOFTWARE_NAME="binutils"
-		export SOFTWARE_VERSION="2.26"
 
 		export EASYBUILD_INSTALLPATH=/app
 
@@ -23,6 +21,9 @@ Include: yum
 
 		mkdir -p $EASYBUILD_PREFIX
                 mkdir -p $EASYBUILD_INSTALLPATH
+
+		chmod 777 $EASYBUILD_PREFIX
+		chmod 777 $EASYBUILD_INSTALLPATH
 
 		# install some basic tools, need this for building basic programs like binutils
 		yum groupinstall -y 'Development Tools'
@@ -43,20 +44,19 @@ Include: yum
                 pip install -U easybuild
 
 		
-                useradd singularity
+                useradd easybuild
 		# run all commands as singularity user
  	        # runuser singularity -c "export EASYBUILD_ROBOT_PATHS=/usr/easybuild/easyconfigs/; eb --show-full-config; eb binutils-2.26.eb --robot "
- 	        runuser singularity -c "export EASYBUILD_ROBOT_PATHS=/usr/easybuild/easyconfigs/; eb binutils-2.26.eb --robot --modules-tool=Lmod -D "
+ 	        runuser easybuild -l -c "eb binutils-2.26.eb --robot --prefix=/scratch --installpath=/app"
  
 %runscript
                 eval "$@"
 
 %environment
-    export LC_ALL=C
-    if [ $SHELL == /bin/bash ]; then
-	    . /etc/bashrc
-    fi
-    module use ${EASYBUILD_INSTALLPATH}/modules/all
+    source /etc/bashrc 
+    SOFTWARE_NAME=binutil
+    SOFTWARE_VERSION=2.26
+    module use /app/modules/all
     module load ${SOFTWARE_NAME}/${SOFTWARE_VERSION}
 
 
