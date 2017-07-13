@@ -11,10 +11,9 @@ RUN  yum update -y && \
      pip install easybuild && \ 
      pip install GitPython python-graph-dot graphviz keyring keyrings.alt
 
-RUN  mkdir -p /app && \
+RUN  mkdir -p /app/easybuild/modules/all/Core && \
      mkdir -p /scratch/tmp && \
      useradd easybuild && \
-     chown easybuild:easybuild /app && \
+     chown easybuild:easybuild -R /app && \
      chown easybuild:easybuild -R /scratch 
 
-ENV  MODULEPATH /app/easybuild/modules/all/Core:${MODULEPATH}
