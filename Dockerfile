@@ -15,11 +15,5 @@ RUN  mkdir -p /app && \
      mkdir -p /scratch/tmp && \
      useradd easybuild && \
      chown easybuild:easybuild /app && \
-     chown easybuild:easybuild -R /scratch && \
-     su - easybuild && \
-     echo "export EASYBUILD_PREFIX=/scratch" >> ~/.bashrc && \
-     echo "export EASYBUILD_INSTALL_PATH=/app" >> ~/.bashrc && \
-     echo "export EASYBUILD_MODULE_NAMING_SCHEME=HierarchicalMNS" >> ~/.bashrc && \
-     echo "export EASYBUILD_TMPDIR=/scratch/tmp" >> ~/.bashrc 
+     chown easybuild:easybuild -R /scratch 
 
- 
