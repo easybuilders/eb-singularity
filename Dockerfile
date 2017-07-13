@@ -17,3 +17,4 @@ RUN  mkdir -p /app && \
      chown easybuild:easybuild /app && \
      chown easybuild:easybuild -R /scratch 
 
+ENV  MODULEPATH /app/easybuild/modules/all/Core:${MODULEPATH}
