@@ -19,7 +19,8 @@ From: shahzebsiddiqui/easybuild
 		yum install -y M4-1.4.17-eb_3.3.1-1.x86_64.rpm \
    			       Bison-3.0.4-eb_3.3.1-1.x86_64.rpm \
 			       flex-2.6.0-eb_3.3.1-1.x86_64.rpm \
-			       zlib-1.2.8-eb_3.3.1-1.x86_64.rpm
+			       zlib-1.2.8-eb_3.3.1-1.x86_64.rpm \
+			       binutils-2.26-eb_3.3.1-1.x86_64.rpm			
 
 		su - easybuild
 		export EASYBUILD_INSTALLPATH=/app
@@ -27,7 +28,7 @@ From: shahzebsiddiqui/easybuild
 		export EASYBUILD_TMPDIR=/scratch/tmp
 		export EASYBUILD_MODULE_NAMING_SCHEME=HierarchicalMNS
 		module use /app/modules/all/Core
- 	        eb binutils-2.26.eb --package --packagepath=/tmp
+ 	        eb GCCcore-5.4.0.eb --package --packagepath=/tmp
 		exit 
  
 %runscript
@@ -36,7 +37,7 @@ From: shahzebsiddiqui/easybuild
 %environment
     source /etc/profile
     module use /app/modules/all/Core
-    module load binutils/2.26
+    module load GCCcore/5.4.0
 
 
 %label
