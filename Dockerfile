@@ -6,9 +6,14 @@ RUN  yum update -y && \
      yum install -y which && \
      yum install -y epel-release && \
      yum install -y python-pip python-devel openssl-devel Lmod && \
+     # need this for --package to work to generate RPM	
+     yum install ruby ruby-devel rubygems -y && \
+     gem install fpm && \
+
      pip install --upgrade pip && \
      pip install setuptools && \
      pip install easybuild && \ 
+     # need this for git integration with eb
      pip install GitPython python-graph-dot graphviz keyring keyrings.alt
 
 RUN  mkdir -p /app/easybuild/modules/all/Core && \
