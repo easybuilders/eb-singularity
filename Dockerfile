@@ -3,7 +3,7 @@ FROM centos:latest
 # install dependencies 
 RUN  yum update -y && \
      yum groupinstall -y "Development Tools" && \	
-     yum install -y which && \
+     yum install -y which wget && \
      yum install -y epel-release && \
      yum install -y python-pip python-devel openssl-devel Lmod && \
      # need this for --package to work to generate RPM	
