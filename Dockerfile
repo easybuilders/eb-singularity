@@ -16,7 +16,10 @@ RUN  yum update -y && \
      # need this for git integration with eb
      pip install GitPython python-graph-dot graphviz keyring keyrings.alt
 
-RUN  mkdir -p /app/easybuild/modules/all/Core && \
+RUN  mkdir -p /app/modules/all/Core && \
+     mkdir -p /app/software/Core && \
+     mkdir -p /app/software/Compiler && \
+     mkdir -p /app/software/MPI && \
      mkdir -p /scratch/tmp && \
      useradd easybuild && \
      chown easybuild:easybuild -R /app && \
