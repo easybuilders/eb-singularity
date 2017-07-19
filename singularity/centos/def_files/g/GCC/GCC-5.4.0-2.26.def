@@ -1,0 +1,45 @@
+# Author: Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
+
+# docker-bootstrap:
+# Copyright (c) 2015-2016, Gregory M. Kurtzer. All rights reserved.
+# 
+# "Singularity" Copyright (c) 2016, The Regents of the University of California,
+# through Lawrence Berkeley National Laboratory (subject to receipt of any
+# required approvals from the U.S. Dept. of Energy).  All rights reserved.
+
+BootStrap: docker
+From: shahzebsiddiqui/easybuild
+
+
+%post
+		cd $HOME
+		git clone https://github.com/shahzebsiddiqui/eb-singularity.git
+		cd eb-singularity
+		git checkout eb-rpms
+		yum install -y M4-1.4.17-eb_3.3.1-1.x86_64.rpm \
+   			       Bison-3.0.4-eb_3.3.1-1.x86_64.rpm \
+			       flex-2.6.0-eb_3.3.1-1.x86_64.rpm \
+			       zlib-1.2.8-eb_3.3.1-1.x86_64.rpm \
+			       binutils-2.26-eb_3.3.1-1.x86_64.rpm \
+			       GCCcore-5.4.0-eb_3.3.1-1.x86_64.rpm			
+
+		su - easybuild
+		export EASYBUILD_INSTALLPATH=/app
+		export EASYBUILD_PREFIX=/scratch
+		export EASYBUILD_TMPDIR=/scratch/tmp
+		export EASYBUILD_MODULE_NAMING_SCHEME=HierarchicalMNS
+		module use /app/modules/all/Core
+ 	        eb GCC-5.4.0-2.26.eb --robot --package --packagepath=/tmp
+		exit 
+ 
+%runscript
+                eval "$@"
+
+%environment
+    source /etc/profile
+    module use /app/modules/all/Core
+    module load GCC/5.4.0-2.26
+
+
+%label
+AUTHOR Shahzeb Siddiqui <shahzebmsiddiqui@gmail.com>
