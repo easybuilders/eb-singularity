@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM centos:6.9
 
 # install dependencies 
 RUN  yum update -y && \
@@ -16,14 +16,8 @@ RUN  yum update -y && \
      # need this for git integration with eb
      pip install GitPython python-graph-dot graphviz keyring keyrings.alt
 
-     # temporarily need git-lfs to download rpm, will remove this in future
-RUN  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash && \
-     yum install git-lfs -y
-
-RUN  mkdir -p /app/modules/all/Core && \
-     mkdir -p /app/software/Core && \
-     mkdir -p /app/software/Compiler && \
-     mkdir -p /app/software/MPI && \
+RUN  mkdir -p /app/modules/ && \
+     mkdir -p /app/software && \
      mkdir -p /scratch/tmp && \
      useradd easybuild && \
      chown easybuild:easybuild -R /app && \
