@@ -1,0 +1,21 @@
+BootStrap: shub
+From: easybuilders/eb-singularity:centos-7.3.1611
+
+%post
+su - easybuild
+eb GCCcore-5.4.0.eb --robot --installpath=/app/ --prefix=/scratch --tmpdir=/scratch/tmp  --module-naming-scheme=EasyBuildMNS
+exit
+rm -rf /scratch/tmp/*
+rm -rf /scratch/build
+rm -rf /scratch/sources
+rm -rf /scratch/ebfiles_repo
+
+%runscript
+eval "$@"
+
+%environment
+source /etc/profile
+module use /app/modules/all/
+module load GCCcore/5.4.0
+
+%labels 
