@@ -1,5 +1,5 @@
 Bootstrap: library
-From:  shahzebmsiddiqui/default/easybuild:1.0
+From:  shahzebmsiddiqui/default/easybuild:centos-7
 
 %post
 
@@ -14,7 +14,7 @@ pip install easybuild
 # change to 'easybuild' user
 su - easybuild << 'EOF'
 set -ve
-eb Anaconda2-5.3.0.eb --robot
+eb GCCcore-8.3.0.eb --robot
 mkdir -p /app/lmodcache
 $LMOD_DIR/update_lmod_system_cache_files -d /app/lmodcache -t /app/lmodcache/timestamp /app/modules/all
 EOF
@@ -37,6 +37,6 @@ module unuse $MODULEPATH
 # pick up modules installed in /app
 module use /app/modules/all
 # load module(s) corresponding to installed software
-module load Anaconda2/5.3.0
+module load GCCcore/8.3.0
 
 %labels

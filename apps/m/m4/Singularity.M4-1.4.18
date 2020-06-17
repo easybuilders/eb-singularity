@@ -1,5 +1,5 @@
 Bootstrap: library
-From:  shahzebmsiddiqui/default/easybuild:1.0
+From:  shahzebmsiddiqui/default/easybuild:centos-7
 
 %post
 

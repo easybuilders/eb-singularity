@@ -1,5 +1,5 @@
 Bootstrap: library
-From:  shahzebmsiddiqui/default/easybuild:1.0
+From:  shahzebmsiddiqui/default/easybuild:centos-7
 
 %post
 
@@ -14,7 +14,7 @@ pip install easybuild
 # change to 'easybuild' user
 su - easybuild << 'EOF'
 set -ve
-eb binutils-2.28.eb --robot
+eb M4-1.4.17.eb --robot
 mkdir -p /app/lmodcache
 $LMOD_DIR/update_lmod_system_cache_files -d /app/lmodcache -t /app/lmodcache/timestamp /app/modules/all
 EOF
@@ -37,6 +37,6 @@ module unuse $MODULEPATH
 # pick up modules installed in /app
 module use /app/modules/all
 # load module(s) corresponding to installed software
-module load binutils/2.28
+module load M4/1.4.17
 
 %labels
